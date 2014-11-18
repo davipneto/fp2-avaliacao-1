@@ -16,30 +16,68 @@ public class Complexo {
     }
 
     public Complexo(double real, double img) {
-        // completar a implementação
+        this.real=real;
+        this.img=img;
     }
 
-    // implementar getReal()
+    public double getReal(){
+        return real;
+    }
 
-    // implementar getImg()
+    public double getImg(){
+        return img;
+    }
 
     public Complexo soma(Complexo c) {
         return new Complexo(real + c.real, img + c.img);
     }
     
-    // implementar sub(Complexo)
+    public Complexo sub(Complexo c){
+        return new Complexo(real - c.real,img - c.img);
+    }
 
-    // implementar prod(double)
+    public Complexo prod(double x){
+        return new Complexo(x*real,x*img);
+    }
 
-    // implementar prod(Complexo)
+    public Complexo prod(Complexo c){
+        return new Complexo(real*c.real-img*c.img,img*c.real+real*c.img);
+    }
     
-    // implementar div(Complexo)
+    public Complexo div(Complexo c){
+        return new Complexo((real*c.real+img*c.img)/(Math.pow(c.real, 2)+Math.pow(c.img,2)),(c.real*img-real*c.img)/(Math.pow(c.real, 2)+Math.pow(c.img,2)));
+    }
     
-    // implementar sqrt()
     public Complexo[] sqrt() {
-        // completar implementação
-        // retornar o vetor contendo as raízes
-        return null;
+        double r = Math.sqrt(Math.pow(real,2)+Math.pow(img,2));
+        double p = Math.sqrt(r);
+        double y, v1, v2;
+        if(real>0){
+            y = Math.atan(img/real);
+        }
+        else if(real<0){
+            y = (Math.atan(img/real) + Math.PI);
+        }
+        else{
+            if(img == 0){
+                y=0;
+            }
+            else if(img>0){
+                y=Math.PI/2;
+            }
+            else{
+                y=3*Math.PI/2;
+            }
+        }
+        v1=y/2;
+        v2=v1+Math.PI;
+        
+        Complexo[] c = new Complexo[2];
+        Complexo raiz1 = new Complexo(p*Math.cos(v1),p*Math.sin(v1));
+        Complexo raiz2 = new Complexo(p*Math.cos(v2),p*Math.sin(v2));
+        c[0]=raiz1;
+        c[1]=raiz2;
+        return c;
     }
 
     @Override
